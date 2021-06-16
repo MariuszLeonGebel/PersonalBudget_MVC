@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Logowanie{% endblock %}
+
+{% block style %}
+  <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+    h2{color: black;}
+    label{color: black;}
+
+    .input-container {
+      display: -ms-flexbox; /* IE10 */
+      display: flex;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .icon {
+      padding: 10px;
+      background: dodgerblue;
+      color: white;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      outline: none;
+    }
+
+    .input-field:focus {
+      border: 2px solid dodgerblue;
+    }
+
+    /* Set a style for the submit button */
+    .btn {
+      background-color: dodgerblue;
+      color: white;
+      padding: 15px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .btn:hover {
+      opacity: 1;
+    }
+
+    #button_color
+    {
+      background-color: red;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+ <form action="/login/create" method="post" style="max-width:450px; margin:auto;">
+      <h2>Logowanie</h2>
+      <div class="input-container">
+        <i class="fa fa-user icon"></i>
+        <input class="input-field" type="text" placeholder="Login" name="login" onkeydown="usuwanieKomentarza()" autofocus value="{{ login }}">
+      </div>
+      {% if user.errorLogin is not empty %}
+        <div style="color:red; text-align: center; margin-top: auto; margin-bottom: 3%;">  {{ user.errorLogin }}    
+        </div>
+      {% endif %} 
+
+      <div class="input-container">
+        <i class="fa fa-key icon"></i>
+        <input class="input-field" type="password" placeholder="Hasło" name="haslo" onkeydown="usuwanieKomentarza()">
+      </div>
+      {% if user.errorPassword is not empty %}
+        <div style="color:red; text-align: center; margin-top: auto; margin-bottom: 3%;">  {{ user.errorPass }}    
+        </div>
+      {% endif %} 
+
+      <button type="submit" class="btn">Zaloguj się</button>
+      <a href="/"><button type="button" class="btn" id="button_color" onclick="returnToIndex()">Anuluj</button></a> 
+     
+      <div id="kom_blad"></div>
+    </form>
+ 
+
+{% endblock %}
+
+
+

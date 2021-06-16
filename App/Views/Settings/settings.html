@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Ustawienia{% endblock %}
+
+{% block body %}
+
+      <nav class="navbar navbar-light bg-faded navbar-expand-sm">
+    
+     <div class="collapse navbar-collapse navbar-toggleable-md" id="navbarNavAltMarkup">
+          <div class="navbar-nav mx-auto">
+              <a class="nav-link" href="/userData" style="line-height: 1; text-align: center;">Dane<br />użytkownika</a>
+              <a class="nav-link disabled" href="#" style="line-height: 1; text-align: center;">Kategorie<br />przychodów</a>
+              <a class="nav-link disabled" href="#" style="line-height: 1; text-align: center;">Kategorie<br /> wydatków</a>
+              <a class="nav-link disabled" href="#" style="line-height: 1; text-align: center;">Rodzaje<br />płatności</a>
+              <a class="nav-link" href="/menu" style="line-height: 1; text-align: center;">Menu<br />główne</a>
+          </div> 
+      </div>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      </nav>
+
+    <div class="alert alert-success">Jakie ustawienia chcesz dodać/usunąć/zmienić?</div>
+   
+ 
+
+{% endblock %}

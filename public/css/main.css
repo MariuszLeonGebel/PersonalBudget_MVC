@@ -1,0 +1,72 @@
+body
+{
+	background-image: url("img/redox_01.png");
+	color: #efefef;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 17px;
+}
+
+h1
+{
+	font-size: 36px;
+	font-weight: 400;
+	color: #C0D06F;
+}
+
+.fancy1
+{
+	font-family: 'Lemon', cursive;
+	text-align: center;
+
+}
+
+.fancy3
+{
+	font-family: 'Pacifico', cursive;
+	text-align: center;
+	color: grey;
+	margin-bottom: 30px;
+}
+
+.selection
+{
+	width: 50%;
+}
+
+.green
+{
+	color: green;
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+}
+
+p
+{
+	color: blue;
+	font-family: 'Great Vibes', cursive;
+	line-height: 1;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.row .index_button
+{
+	width: 100%;
+}
+
+.alert
+{
+	text-align: center;
+}
+
+.center
+{
+	margin-top: auto;
+	margin-bottom: auto
+}
+
+.btn
+{
+	margin-bottom: 10px;
+}
+

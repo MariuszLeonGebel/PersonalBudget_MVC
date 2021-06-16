@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Rejestracja{% endblock %}
+
+{% block style %}
+   <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+    h2{color: black;}
+
+    .input-container {
+      display: -ms-flexbox;
+      display: flex;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .icon {
+      padding: 10px;
+      background: dodgerblue;
+      color: white;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      outline: none;
+    }
+
+    .input-field:focus {
+      border: 2px solid dodgerblue;
+    }
+
+    .btn {
+      background-color: dodgerblue;
+      color: white;
+      padding: 15px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .btn:hover {
+      opacity: 1;
+    }
+
+    #button_color
+    {
+      background-color: red;
+    }
+
+    .g-recaptcha
+    {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+
+<!-- 	{% if user.errors is not empty %}
+		<p style="color: red">Błędy:</p>
+		<ul>
+			{% for error in user.errors %}
+				<li style="color: red">{{ error }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %} -->
+
+ <form id="formSignup" method="post" action="/signup/create" style="max-width:450px;margin:auto">
+    <h2>Rejestracja</h2>
+    <div class="input-container">
+      <i class="fa fa-user icon"></i>
+      <input class="input-field" type="text" placeholder="Login" autofocus name="login" value="{{ user.login}}" required>
+   </div>
+    {% if user.errorLogin is not empty %}
+      <div style="color:red; text-align: center; margin-top: auto; margin-bottom: 3%;">  
+        {{ user.errorLogin }}    
+      </div>
+    {% endif %} 
+    
+
+    <div class="input-container">
+      <i class="fa fa-envelope icon"></i>
+      <input class="input-field" type="email" placeholder="Email" name="email" value="{{ user.email}}" required>
+    </div>
+    
+    {% if user.errorEmail is not empty %}
+      <div style="color:red; text-align: center; margin-top: auto; margin-bottom: 3%;">  
+        {{ user.errorEmail }}    
+      </div>
+    {% endif %} 
+  
+    <div class="input-container">
+      <i class="fa fa-key icon"></i>
+      <input id="inputPassword" class="input-field" type="password" placeholder="Hasło" name="haslo1" required>
+    </div>
+
+    {% if user.errorPassword is not empty %}
+      <!-- <ul> -->
+        {% for error in user.errorPassword %}
+          <div style="color:red; text-align: center; margin-top: auto; margin-bottom: 3%;">{{ error }}</div>
+        {% endfor %}
+      <!-- </ul> -->
+    {% endif %}
+   
+    
+     <div class="input-container">
+      <i class="fa fa-key icon"></i>
+      <input class="input-field" type="password" placeholder="Powtórz hasło" name="haslo2" required>
+    </div>
+
+    <button type="submit" class="btn" style="margin-top: 10px">Zarejestruj się</button>
+   
+    <a href="/"><button type="button" class="btn" id="button_color">Anuluj</button></a>
+  </form>
+{% endblock %}

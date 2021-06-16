@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+
+{% block title %}Bilans{% endblock %}
+
+{% block body %}
+	<!-- <body onload="start()"> -->
+	 <nav class="navbar navbar-light bg-faded navbar-expand-sm">
+	  
+	    <div class="collapse navbar-collapse navbar-toggleable-md">
+	        <div class="navbar-nav mx-auto">
+	            <a class="nav-link" href="/income">Przychód</a>
+	            <a class="nav-link" href="/expense">Wydatek</a>
+	            <a class="nav-link active" href="/balance">Bilans</a>
+	            <a class="nav-link" href="/settings">Ustawienia</a>
+	            <a class="nav-link" href="/logout">Wylogowanie</a>
+	        </div>
+	    </div>
+	    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	    </button>
+	 </nav>		
+
+	<div class="container bg-white text-center col-12 col-lg-10 col-xl-8 mt-sm-2 p-1 p-lg-3 shadow">		
+		<h1>BILANS</h1>
+		
+		<fieldset class="border m-2">		
+			<form method="Post" action="/Balance/create">
+				<div class="input-group mb-2 w-75 mx-auto mt-4">
+					<div class="input-group-prepend w-50">
+						<span class="input-group-text w-100 justify-content-center">Podaj okres bilansu</span>
+					</div>
+					<select id="okres" class="selection" name="wybor" onchange="wyborOkresu()">
+						<option value="Aktualny">Aktualny miesiąc</option>
+						<option value="Poprzedni">Poprzedni miesiąc</option>
+						<option value="Rok">Aktualny rok</option>
+						<option value="InnyOkres">Inny okres</option>
+					</select>
+				</div>
+
+				<div id="wybranyOkresSprawozdania" style="color: #C0D06F; margin-bottom: 10px; font-size: 16px;">				
+				</div>
+
+				<fieldset class="border m-2 rounded">
+					<label for="radioSuma" style="color: black;">Podsumowania</label>
+					<input id="radioSuma" type="radio" name="rodzajRaportu" style="margin-right: 50px; color: black; margin-top: 20px; margin-bottom: 20px;" value="podsumowania"checked>
+
+					<label for="radioSzczegol" style="color: black;">Szczegóły</label>
+					<input id="radioSzczegol" type="radio" name="rodzajRaportu" style="margin-right: 50px; color: black;" value="szczegoly">
+				</fieldset>
+				
+				<!-- Button trigger modal -->
+				<button id="hiddenbutton" type="button" class="btn btn-warning btn-sm mb-2 w-75 mx-auto mt-0" data-toggle="modal" data-target="#myModal" style="display: none; width: 100%;">
+	  			Zmień okres zestawienia
+				</button>
+
+					<input id="DPocz" type="text" name="DP" style="display: none">
+					<input id="DKonc" type="text" name="DK" style="display: none">
+					<input type="text" name="Spr" value="Spr-jestem" style="display: none">
+					<input id="tO" type="text" name="Okres" style="display: none;">
+					
+				<button id="statementButton" type="submit" class="btn btn-primary btn-sm mb-2 w-75 mx-auto mt-2" style="display: none; width: 100%;" name="statButton" onclick="wyborOkresu()">
+	  			Pokaż zestawienie
+				</button>
+			</form>		
+
+			<div id="kolorWynikuFinansowego" class="bg-success py-3 px-4 mt-3 mb-3">
+				<h5 id="wynikFinansowy" class="font-weight-bold">Wybierz okres zestawienia</h5>
+				<h5 id="komWynikuFinansowego" class="font-weight-bold"></h5>
+			</div>			
+
+			<div class="bg-info">
+				<h6 id="pasekOkresu" class="font-weight-bold"></h6>
+			</div>
+		
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" aria-hidden="true" style="display: none;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<form method="post">
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title" style="color: #C0D06F;">Wybierz okres zestawienia: </h4>
+								<button type="button" class="close" data-dismiss="modal">×</button>
+							</div>							
+							<!-- Modal body -->
+							<div class="modal-body">
+								<div class="input-group mb-2 w-100">
+									<div class="input-group-prepend w-50">
+										<span class="input-group-text w-100 justify-content-center">Data początkowa:</span>
+									</div>
+									<input id="dateB" type="date" name="start" class="form-control" required="">
+								</div>
+								<div class="input-group mb-2 w-100">
+									<div class="input-group-prepend w-50">
+										<span class="input-group-text w-100 justify-content-center">Data końcowa:</span>
+									</div>
+									<input id="dateE" type="date" name="end" class="form-control" required="">
+								</div>
+
+								<script>
+									let today = new Date().toISOString().substr(0, 10);
+									document.querySelector("#dateB").valueAsDate = new Date();
+									document.querySelector("#dateE").valueAsDate = new Date();
+								</script>										
+							</div>
+						
+							<!-- Modal footer -->
+							<div class="modal-footer">
+							<input type="button" class="btn btn-primary" name="customize_period" onclick="zamkniecieModal()" value="OK" data-dismiss="modal">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- End Modal -->
+
+			<fieldset class="border m-3">
+				<legend class="border" style="color: #C0D06F">Przychody (podsumowanie)</legend>
+				<table class="table table-striped m-2 col-11 col-md-6 table-sm" style="width: 60%; color: black; float: left; border-collapse: separate; border: 1px solid grey; font-size: 14px;">
+					<colgroup>
+						<col width="70%">
+						<col width="30%">
+					</colgroup>
+		    		<thead>
+				    <tr>
+				      <th scope="col">Kategoria</th>
+				      <th scope="col">Kwota</th>
+				    </tr>
+				  	</thead>
+				  	<tbody>
+				  		{% for item in incomeTr %}
+            		
+            				{% if item[2] > 0 %}
+
+            			<tr >
+							<td> {{ item[0] }} </td>
+							<td style="text-align: right;">{{ item[2]|number_format(2, ',', '.') }}</td>
+						</tr>
+
+							{% endif%}
+
+            			{% endfor %}
+
+				  	</tbody>
+					<tfoot>
+					<tr>
+					<th style="text-align: right;">RAZEM</th>			
+					<th style="text-align: right;"> {{ incomeSum[0]|number_format(2, ',', '.') }} </th>
+					</tr>
+					</tfoot>	
+				</table>
+			</fieldset>
+
+
+			<fieldset class="border m-3">
+				<legend class="border" style="color: #C0D06F">Wydatki (podsumowanie)</legend>
+				<table class="table table-striped m-2 col-11 col-md-6 table-sm" style="width: 60%; color: black; float: left; border-collapse: separate; border: 1px solid grey; font-size: 14px;">
+					<colgroup>
+						<col width="70%">
+						<col width="30%">
+					</colgroup>
+		    		<thead>
+				    <tr>
+				      <th scope="col">Kategoria</th>
+				      <th scope="col">Kwota</th>
+				    </tr>
+				  	</thead>
+				  	<tbody>
+				  		{% for item in expenseTr %}
+
+            				{% if item[2] > 0 %}
+
+            			<tr >
+							<td> {{ item[0] }} </td>
+							<td style="text-align: right;">{{ item[2]|number_format(2, ',', '.') }}</td>
+						</tr>
+
+							{% endif%}
+
+            			{% endfor %}
+
+				  	</tbody>
+					<tfoot>
+					<tr>
+					<th style="text-align: right;">RAZEM</th>
+					<th style="text-align: right;"> {{ expenseSum[0]|number_format(2, ',', '.') }} </th>
+					</tr>
+					</tfoot>
+				</table>	
+			</fieldset>
+
+			<!-- tu będzie kod zestawienia szczegółowego -->
+	
+
+		</fieldset>
+	</div>
+		
+    <script >
+        IncSum = {{ incomeSum[0] }};
+        ExpSum = {{ expenseSum[0] }};
+		wynik();
+	</script>
+
+   
+
+{% endblock %}
+
+ 
+
+	

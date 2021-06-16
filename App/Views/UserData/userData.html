@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Dane użytkownika{% endblock %}
+
+{% block style %}
+  <style>
+   body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+    h1{color: #C0D06F; text-align: center;}
+
+    .input-container {
+      display: -ms-flexbox;
+      display: flex;
+      width: 100%;
+      margin-bottom: 15px;
+      height: 40px;
+    }
+
+    .icon {
+      padding: 10px;
+      background: dodgerblue;
+      color: white;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      outline: none;
+    }
+
+    .input-field:focus {
+      border: 2px solid dodgerblue;
+    }
+
+    .btn {
+      background-color: dodgerblue;
+      color: white;
+      padding: 5px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      height: 40px;
+    }
+
+    .btn:hover {
+      opacity: 1;
+    }
+
+    #button_color
+    {
+      background-color: orange;
+    }
+
+    .g-recaptcha
+    {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+   <form method="post" style="max-width:450px; margin:auto">
+    <h1>DANE UŻYTKOWNIKA</h1>
+    <div class="input-container">
+      <i class="fa fa-user icon"></i>
+      <input class="input-field" type="text" placeholder="login" name="login">
+    <input type="hidden" name="zmiana_loginu">
+    <button type="submit" class="btn" style="width: 80%; ">Zapisz nowy login</button>
+
+      </div>
+
+   <!--     <?php
+      if (isset($_SESSION['e_login']))
+      {
+        echo '<div class="error" style="color:red; font-size: 12px; text-align: center; margin-top: auto; margin-bottom: 10px;">'.$_SESSION['e_login'].'</div>';
+        unset($_SESSION['e_login']);
+      }
+    ?> -->
+
+  </form>
+  <form method="post" style="max-width:450px;margin:auto">
+    <div class="input-container">
+      <i class="fa fa-envelope icon"></i>
+      <input class="input-field" type="text" placeholder="e-mail" name="email">
+      <input type="hidden" name="zmiana_emaila">
+     <button type="submit" class="btn" style="width: 80%; ">Zapisz nowy e-mail</button>
+    </div>
+
+  <!--   <?php
+      if (isset($_SESSION['e_email']))
+      {
+        echo '<div class="error" style="color:red; font-size: 12px; text-align: center; margin-top: auto; margin-bottom: 10px;">'.$_SESSION['e_email'].'</div>';
+        unset($_SESSION['e_email']);
+      }
+    ?> -->
+    </form>
+
+  <form method="post" style="max-width:450px;margin:auto">
+    <div class="input-container">
+      <i class="fa fa-key icon"></i>
+      <input class="input-field" type="password" placeholder="Nowe hasło" value="" name="haslo1">
+    </div>
+    
+     <div class="input-container">
+      <i class="fa fa-key icon"></i>
+      <input class="input-field" type="password" placeholder="Powtórz nowe hasło" value="" name="haslo2">
+
+     <input type="hidden" name="zmiana_hasla">
+    <button type="submit" class="btn" style="width: 80%; ">Zapisz nowe hasło</button>
+    </div>
+
+    <!--   <?php
+      if (isset($_SESSION['e_haslo']))
+      {
+        echo '<div class="error" style="color:red; font-size: 12px; text-align: center; margin-top: auto; margin-bottom: 10px;">'.$_SESSION['e_haslo'].'</div>';
+        unset($_SESSION['e_haslo']);
+      }
+      ?> -->
+    
+    <a href="/settings"><button type="button" class="btn" id="button_color">Powrót do ustawień</button></a> 
+  </form>
+ 
+
+{% endblock %}

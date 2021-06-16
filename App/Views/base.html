@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    
+    <link rel="shortcut icon" href="https://img.icons8.com/office/16/000000/money-bag.png"/>
+    	<!-- <a href="https://icons8.com/icon/43840/money-box">Money Box icon by Icons8</a> money-box--v1.png-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/
+	css2?family=Great+Vibes&family=Lemon&family=Pacifico&family=Lato&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>{% block style %}{% endblock %}</style>
+ 	<script src="/js/jsscripts.js"></script>
+</head>
+<body>
+	
+    {% block body %}
+   	{% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>   	
+ 
+    {% block footer %}    
+      	<script src="/js/jquery/jquery.min.js"></script>
+	    <script src="/js/popper/popper.min.js"></script>
+	    <script src="/js/bootstrap/bootstrap.min.js"></script>		   
+    {% endblock %}
+</body>
+</html>

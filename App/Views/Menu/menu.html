@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Finanse osobiste{% endblock %}
+
+{% block body %}
+
+    <nav class="navbar navbar-light bg-faded navbar-expand-sm">
+    
+    <div class="collapse navbar-collapse navbar-toggleable-md" id="navbarNavAltMarkup">
+      <div class="navbar-nav mx-auto">
+          <a class="nav-link" href="/income">Przychód</a>
+          <a class="nav-link" href="/expense">Wydatek</a>
+          <a class="nav-link" href="/balance">Bilans</a>
+          <a class="nav-link" href="/settings">Ustawienia</a>
+          <a class="nav-link" href="/logout">Wylogowanie</a>
+      </div> 
+    </div>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    </nav>
+
+    <div class="alert alert-success">Co chcesz teraz zrobić?.</div>
+
+{% endblock %}

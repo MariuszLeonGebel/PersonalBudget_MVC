@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Finanse osobiste{% endblock %}
+
+{% block body %}
+
+		<main>
+			<div class="container">
+				
+				<header>
+					<h1 class="fancy1">Finanse osobiste</h1>
+				</header>
+
+				<div class="row">
+					<div class="col-sm-12 col-md-6">
+						<figure>
+							<img src="img/pexels-michael-steinberg-321464.jpg" alt="pexels-M. Steinberg" class="img-fluid">
+						</figure>
+					</div>
+	 
+					<div class="center col-sm-12 col-md-6">
+						<p class="green">Prosty sposób</p><p class="green">na kontrolę twoich<p class="green">przychodów i wydatków!</p>
+					</div>
+				</div>
+				<div></div>
+				<div class="row">
+					<div class="col-sm-6">
+						<a href="Signup/new" class="btn btn-warning index_button" style="padding: 3% 0;">Rejestracja</a>
+					</div>
+
+					<div class="col-sm-6">
+						<a href="Login/login" class="btn btn-success index_button" style="padding: 3% 0;">Logowanie</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6" style="color: green; font-size: 12px; text-align: center; margin-left: auto; margin-right: auto;">
+						{% if session.user_id %}
+							Rejestracja zakończyła się powodzeniem! <br/>
+							<!-- User ID: {{ session.user_id }} is logged in -->
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</main>
+
+{% endblock %}
+
+

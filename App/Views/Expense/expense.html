@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Wydatek{% endblock %}
+
+{% block body %}
+
+   <nav class="navbar navbar-light bg-faded navbar-expand-sm">
+    
+        <div class="collapse navbar-collapse navbar-toggleable-md" id="navbarNavAltMarkup">
+            <div class="navbar-nav mx-auto">
+                <a class="nav-link" href="/income">Przychód</a>
+                <a class="nav-link active" href="/expense">Wydatek</a>
+                <a class="nav-link" href="/balance">Bilans</a>
+                <a class="nav-link" href="/settings">Ustawienia</a>
+                <a class="nav-link" href="/logout">Wylogowanie</a>
+            </div>
+        </div>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    </nav>  
+
+    <div class="container bg-white text-center" style="max-width:450px; margin:auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+      <h1 style="margin-top: 10px; padding-top: 15px;">WYDATEK</h1>
+      
+      <form method="post" action="/expense/create">
+        <div class="input-group mb-2">
+          <div class="input-group-prepend w-25">
+            <span class="input-group-text w-100 justify-content-center">Kwota</span>
+          </div>
+          <input type="text" class="form-control" placeholder="0,00" name="kwota" onkeydown="usuwanieKomentarza()" autofocus /> 
+          <span style="margin-left: 5px; color: red;">*</span>        
+        </div>
+        
+        <div id="kom_amount" style="color:red; font-size: 12px; text-align: center; margin-top: auto; margin-bottom: 3%;">
+          {% if userExpense.errorKwota is not empty %}          
+            {{ userExpense.errorKwota }}          
+          {% endif %} 
+        </div> 
+        
+        <div class="input-group mb-2">
+          <div class="input-group-prepend w-25">
+            <span class="input-group-text w-100 justify-content-center">Data</span>
+          </div>
+          <input id="date" type="date" class="form-control" name="data" onkeydown="usuwanieKomentarza()"/>
+          <span style="margin-left: 5px; color: red;">*</span>  
+        </div>
+        
+        <div id="kom_date" style="color:red; font-size: 12px; text-align: center; margin-top: auto; margin-bottom: 3%;"> 
+            {% if userExpense.errorData is not empty %}                      
+              {{ userExpense.errorData }}                  
+            {% endif %} 
+        </div>
+
+        <script>
+          let today = new Date().toISOString().substr(0, 10);
+          document.querySelector("#date").value = today;
+        </script>
+ 
+         <div class="input-group mb-2">
+          <div class="input-group-prepend w-25">
+            <span class="input-group-text w-100 justify-content-center">Kategoria</span>
+          </div>
+
+          <div class="dropdown flex-grow-1">      
+          <select class="dropdown h-100 w-100" name="kategoria" onchange="usuwanieKomentarza()">
+            {% for item in expense_cats %}
+            <option value="{{ item.id }}"> {{ item.name }} </option>
+            {% endfor %}
+          </select> 
+          </div>
+
+          <span style="margin-left: 5px; color: red;">*</span>
+        </div>
+
+         <div class="input-group mb-2">
+          <div class="input-group-prepend w-25">
+            <span class="input-group-text w-100 justify-content-center">Płatność</span>
+          </div>
+
+          <div class="dropdown flex-grow-1">      
+          <select class="dropdown h-100 w-100" name="platnosc" onchange="usuwanieKomentarza()">
+            {% for item in payment_cats %}
+            <option value="{{ item.id }}"> {{ item.name }} </option>
+            {% endfor %}
+          </select> 
+          </div>
+
+          <span style="margin-left: 5px; color: red;">*</span>
+        </div>
+
+        <div class="input-group mb-2">
+          <div class="input-group-prepend w-25">
+            <span class="input-group-text w-100 justify-content-center">Opis</span>
+          </div>
+          <textarea class="form-control" name="opis" onkeydown="usuwanieKomentarza()"></textarea>
+        </div>
+
+        <div id="kom_success" style="color:green; font-size: 15px; text-align: center; margin-top: auto; margin-bottom: auto;">
+                {% if userExpense.successComment is not empty %}
+                  {{ userExpense.successComment }}
+                {% endif %}
+        </div>
+        
+        <div class="w-100 mt-4">
+          <button type="submit" class="btn btn-primary mr-2">Dodaj wydatek</button>
+        </div>
+
+        <!-- <div id="komunikat"></div> -->
+      </form>     
+    </div>
+
+{% endblock %}
